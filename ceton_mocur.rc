@@ -1,0 +1,48 @@
+/*++
+
+Copyright (c) 2013 Ceton Corporation.
+
+--*/
+
+#include <windows.h>
+
+//
+// Version resources
+//
+#include <ntverp.h>
+
+#include "ctn_ver.h"
+
+#define STR_EXPAND(tok) #tok
+#define STR(tok) STR_EXPAND(tok)
+
+#define VER_STR(c, year, month, day, time) STR(year) c STR(month) c STR(day) c STR(time)
+
+#define VER_FILETYPE                VFT_DRV
+#define VER_FILESUBTYPE             VFT2_DRV_SYSTEM
+#define VER_FILEDESCRIPTION_STR     "Driver for Ceton InfiniTV Device"
+#define VER_INTERNALNAME_STR        "ceton_mocur.sys"
+#define VER_ORIGINALFILENAME_STR    "ceton_mocur.sys"
+
+#define VER_FILEVERSION             CTN_VER_YEAR,CTN_VER_MONTH,CTN_VER_DAY,CTN_VER_TIME
+#define VER_FILEVERSION_STR         VER_STR(".", CTN_VER_YEAR, CTN_VER_MONTH, CTN_VER_DAY, CTN_VER_TIME)
+
+#undef VER_PRODUCTVERSION
+#define VER_PRODUCTVERSION          VER_FILEVERSION
+
+#undef VER_PRODUCTVERSION_STR
+#define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
+
+#undef VER_COMPANYNAME_STR
+#define VER_COMPANYNAME_STR         "Ceton Corporation"
+
+#undef VER_LEGALCOPYRIGHT_STR
+#define VER_LEGALCOPYRIGHT_STR      "Copyright (C) " STR(20CTN_VER_YEAR) " " VER_COMPANYNAME_STR
+
+#undef VER_PRODUCTNAME_STR
+#define VER_PRODUCTNAME_STR         "Ceton InfiniTV Device"
+
+#define VER_LANGNEUTRAL
+
+#include "common.ver"
+

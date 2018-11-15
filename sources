@@ -1,0 +1,53 @@
+# 
+# Copyright (c) Ceton Corp. All rights reserved.
+# 
+# sources
+# BUILD command sources file
+#
+# For USER_C_FLAGS see http://msdn.microsoft.com/en-us/library/fwkeyyhe(v=vs.100).aspx
+# 
+
+# Using /TP option for checked builds to facilitate C++ constructs in code and aid debugging
+!if !$(FREEBUILD)
+#USER_C_FLAGS=$(USER_C_FLAGS) /TP /RTCs /RTCc /RTCu
+!endif
+
+TARGETNAME=ceton_mocur
+TARGETTYPE=DRIVER
+
+# BSCMAKE_FLAGS=$(BSCMAKE_FLAGS) -n
+
+# /Wp64 
+MSC_WARNING_LEVEL=/W4 /WX
+
+INCLUDES=..;.;
+USER_C_FLAGS=$(USER_C_FLAGS) /GS
+
+C_DEFINES=$(C_DEFINES) -DNDIS_MINIPORT_DRIVER -DNDIS61_MINIPORT=1 -DBINARY_COMPATIBLE=0 -DNDIS_WDM=1 
+C_DEFINES=$(C_DEFINES) -DNTDDI_VERSION=NTDDI_VISTASP1 -DEPRECATE_DDK_FUNCTIONS
+
+PRECOMPILED_INCLUDE=precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj
+
+KMDF_VERSION_MAJOR=1
+
+INF_NAME=ceton_mocur
+NTTARGETFILES=$(OBJ_PATH)\$(O)\$(INF_NAME).inf
+MISCFILES=$(NTTARGETFILES)
+
+TARGETLIBS=$(DDK_LIB_PATH)\ndis.lib \
+        $(DDK_LIB_PATH)\ntstrsafe.lib
+            
+SOURCES = \
+        mp_main.c \
+        mp_init.c \
+        mp_nic.c \
+        mp_dbg.c \
+        mp_req.c \
+        mp_mpeg.c \
+        mp_util.c \
+        mp_rtp.c \
+        mp_epcs.c \
+        mp_recovery.c \
+        ceton_mocur.rc 

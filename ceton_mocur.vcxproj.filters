@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Build Files">
+      <UniqueIdentifier>{5846f48e-92cb-4823-8426-02afb1035ee5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sources">
+      <Filter>Build Files</Filter>
+    </None>
+    <None Include="makefile.inc">
+      <Filter>Build Files</Filter>
+    </None>
+    <None Include="makefile">
+      <Filter>Build Files</Filter>
+    </None>
+    <None Include="ceton_mocur.inx">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="precomp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_cmn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_dbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_def.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_epcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_mpeg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_nic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_rtp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mp_dbg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_epcs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_mpeg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_nic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_req.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_rtp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ceton_mocur.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

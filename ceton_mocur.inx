@@ -1,0 +1,169 @@
+;=============================================================================
+;
+; Copyright (c) Ceton Corporation (2007-2013)
+;
+; CETON MAKES NO WARRANTY OF ANY KIND REGARDING THE CODE.  THIS CODE IS
+; LICENSED ON AN "AS IS" BASIS AND CETON WILL NOT PROVIDE ANY SUPPORT,
+; ASSISTANCE, INSTALLATION, TRAINING OR OTHER SERVICES.  CETON DOES NOT
+; PROVIDE ANY UPDATES, ENHANCEMENTS OR EXTENSIONS.  CETON SPECIFICALLY
+; DISCLAIMS ANY WARRANTY OF MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR ANY
+; PARTICULAR PURPOSE, OR ANY OTHER WARRANTY.  Ceton disclaims all liability,
+; including liability for infringement of any proprietary rights, relating to
+; use of the code. No license, express or implied, by estoppel or otherwise,
+; to any intellectual property rights is granted herein.
+;
+;=============================================================================
+
+
+[version]
+Signature   = "$Chicago$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider   	= %Ceton%
+Compatible  = 1
+CatalogFile = ceton_mocur.cat
+
+[Manufacturer]
+%Ceton%     = Ceton,NTx86,NTamd64
+
+[ControlFlags]
+;CETON PCI ID
+ExcludeFromSelect = PCI\VEN_1B7C&DEV_0004
+
+[Ceton.NTx86]
+;CETON PCI ID
+%ceton_mocur.DeviceDesc%  = ceton_mocur.ndi,    PCI\VEN_1B7C&DEV_0004
+
+[Ceton.NTamd64]
+;CETON PCI ID
+%ceton_mocur.DeviceDesc%  = ceton_mocur.ndi,    PCI\VEN_1B7C&DEV_0004
+
+[ceton_mocur.ndi.NT]
+Characteristics = 0x84 ; NCF_PHYSICAL, NCF_HAS_UI
+BusType         = 5
+AddReg          = ceton_mocur.reg, SupportBridging.reg, ReportedSpeed.reg
+DelReg          = cleanup_params.reg
+CopyFiles       = ceton_mocur.CopyFiles
+*IfType         = 6		; IF_TYPE_ETHERNET_CSMACD 
+*MediaType      = 0		; NdisMedium802_3
+*PhysicalMediaType = 14	; NdisPhysicalMedium802_3
+
+[ceton_mocur.ndi.NT.Services]
+AddService = ceton_mocur, 2, ceton_mocur.Service, common.EventLog
+
+[SupportBridging.reg]
+HKR, Ndi\params\*SupportBridging,       ParamDesc,  0, %SupportBridging%
+HKR, Ndi\params\*SupportBridging,       default,    0, "0"
+HKR, Ndi\params\*SupportBridging,       type,       0, "enum"
+HKR, Ndi\params\*SupportBridging\enum,  "0",        0, "No"
+HKR, Ndi\params\*SupportBridging\enum,  "1",        0, "Yes"
+
+[ReportedSpeed.reg]
+HKR, Ndi\params\*ReportedSpeed,       ParamDesc,  0, %ReportedSpeed%
+HKR, Ndi\params\*ReportedSpeed,       default,    0, "1000"
+HKR, Ndi\params\*ReportedSpeed,       type,       0, "dword"
+
+
+
+;-----------------------------------------------------------------------------
+; ceton_mocur NT specific
+;
+
+[ceton_mocur.ndi.NT.CoInstallers]
+AddReg = ceton_mocur_coinstaller.AddReg
+CopyFiles = ceton_mocur_coinstaller.CopyFilesWdf
+
+[ceton_mocur.reg]
+HKR, Ndi,                       Service,    0, "ceton_mocur"
+; use ndis5 as the upper bound because NT supports it
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+;CETON PCI ID
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Media Center\Service\ehPrivJob\UPnPNetworks,PCI\VEN_1B7C&DEV_0004,0x10001,0x00000001
+HKR, , *NdisDeviceType, 0x00010001, 1
+
+[cleanup_params.reg]
+HKR, , *StartingSubnet
+HKR, Ndi\params
+
+[ceton_mocur_coinstaller.AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoinstaller$KMDFCOINSTALLERVERSION$,WdfCoInstaller", "msdri.dll, CoInstallerEntry"
+
+[ceton_mocur.Service]
+DisplayName         = %ceton_mocur.Service.DispName%
+ServiceType         = %SERVICE_KERNEL_DRIVER%
+StartType           = %SERVICE_DEMAND_START%
+ErrorControl        = %SERVICE_ERROR_NORMAL%
+ServiceBinary       = %12%\ceton_mocur.sys
+LoadOrderGroup      = NDIS
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;-----------------------------------------------------------------------------
+; KMDF Coinstaller section
+;
+
+[ceton_mocur.ndi.NT.Wdf]
+KmdfService = ceton_mocur, ceton_mocur.WdfSect
+
+[ceton_mocur.WdfSect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[ceton_mocur_coinstaller.CopyFilesWdf]
+WdfCoinstaller$KMDFCOINSTALLERVERSION$.dll
+
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+
+[ceton_mocur.CopyFiles]
+ceton_mocur.sys
+
+[SourceDisksNames]
+1 = %DiskDescription%,,,""
+
+[SourceDisksFiles.x86]
+ceton_mocur.sys = 1,i386,
+WdfCoinstaller$KMDFCOINSTALLERVERSION$.dll=1,i386,
+
+[SourceDisksFiles.amd64]
+ceton_mocur.sys = 1,amd64,
+WdfCoinstaller$KMDFCOINSTALLERVERSION$.dll=1,amd64,
+
+[DestinationDirs]
+ceton_mocur.CopyFiles                   = 12
+ceton_mocur_coinstaller.CopyFilesWdf    = 11
+DefaultDestDir                          = 11
+
+[Strings]
+Ceton                           = "Ceton"
+ceton_mocur.DeviceDesc          = "Ceton InfiniTV Network Device"
+ceton_mocur.Service.DispName    = "Ceton InfiniTV Network Device"
+DiskDescription 	            = "Ceton InfiniTV Driver Disk 1"
+
+;
+; network card settings
+;
+SupportBridging                 = "Support Bridging"
+ReportedSpeed                   = "Reported Speed"
+
+;
+; standard stuff, non-localizable
+;
+SERVICE_KERNEL_DRIVER           = 1
+SERVICE_BOOT_START              = 0
+SERVICE_SYSTEM_START            = 1
+SERVICE_AUTO_START              = 2
+SERVICE_DEMAND_START            = 3
+SERVICE_ERROR_NORMAL            = 1
+SERVICE_ERROR_IGNORE            = 0
+
+REG_EXPAND_SZ                   = 0x00020000
+REG_DWORD                       = 0x00010001
+REG_SZ                          = 0x00000000

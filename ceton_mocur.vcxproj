@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ceton_mocur.inx" />
+    <None Include="makefile" />
+    <None Include="makefile.inc" />
+    <None Include="sources" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mp.h" />
+    <ClInclude Include="mp_cmn.h" />
+    <ClInclude Include="mp_dbg.h" />
+    <ClInclude Include="mp_def.h" />
+    <ClInclude Include="mp_epcs.h" />
+    <ClInclude Include="mp_mpeg.h" />
+    <ClInclude Include="mp_nic.h" />
+    <ClInclude Include="mp_rtp.h" />
+    <ClInclude Include="mp_util.h" />
+    <ClInclude Include="precomp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dbg.c" />
+    <ClCompile Include="mp_dbg.c" />
+    <ClCompile Include="mp_epcs.c" />
+    <ClCompile Include="mp_init.c" />
+    <ClCompile Include="mp_main.c" />
+    <ClCompile Include="mp_mpeg.c" />
+    <ClCompile Include="mp_nic.c" />
+    <ClCompile Include="mp_req.c" />
+    <ClCompile Include="mp_rtp.c" />
+    <ClCompile Include="mp_util.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ceton_mocur.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{18C1A3F4-2E88-4DD0-8B2F-96CB309A5AB3}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <OutDir>$(ProjectDir)obj$(DDKBUILDTYPE)_$(DDKTARGETOS)_$(PlatformShortName)</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <OutDir>$(ProjectDir)obj$(DDKBUILDTYPE)_$(DDKTARGETOS)_$(PlatformShortName)</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <IntDir>$(OutDir)</IntDir>
+    <OutDir>$(ProjectDir)obj$(DDKBUILDTYPE)_$(DDKTARGETOS)_$(PlatformShortName)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <IntDir>
+    </IntDir>
+    <OutDir>
+    </OutDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ddk_wlh.props" />
+    <Import Project="ddk_chk.props" />
+    <Import Project="ddk_i386.props" />
+    <Import Project="ddk.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ddk_wlh.props" />
+    <Import Project="ddk_chk.props" />
+    <Import Project="ddk_amd64.props" />
+    <Import Project="ddk.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ddk_wlh.props" />
+    <Import Project="ddk_fre.props" />
+    <Import Project="ddk_i386.props" />
+    <Import Project="ddk.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ddk_wlh.props" />
+    <Import Project="ddk_fre.props" />
+    <Import Project="ddk_amd64.props" />
+    <Import Project="ddk.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>$(OutDir)\$(DDKBUILDARCH)\$(ProjectName).sys</NMakeOutput>
+    <NMakeCleanCommandLine>RMDIR /S /Q "$(OutDir)"</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_CONSOLE;_X86_;_DDK_;_DEBUG;DBG=1;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\wdf\kmdf\1.9;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeBuildCommandLine>CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -bewMgZ</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>RMDIR /S /Q "$(OutDir)"
+CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -cbewMgZ</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>$(OutDir)\$(DDKBUILDARCH)\$(ProjectName).sys</NMakeOutput>
+    <NMakeCleanCommandLine>RMDIR /S /Q "$(OutDir)"</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_CONSOLE;_AMD64_;_DDK_;_DEBUG;DBG=1;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\wdf\kmdf\1.9;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeBuildCommandLine>CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -bewMgZ</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>RMDIR /S /Q "$(OutDir)"
+CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -cbewMgZ</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>$(OutDir)\$(DDKBUILDARCH)\$(ProjectName).sys</NMakeOutput>
+    <NMakeCleanCommandLine>RMDIR /S /Q "$(OutDir)"</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_DDK_;_NDEBUG;DBG=0;_X86_;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\wdf\kmdf\1.9;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeBuildCommandLine>CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -bewMgZ</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>RMDIR /S /Q "$(OutDir)"
+CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -cbewMgZ</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>$(OutDir)\$(DDKBUILDARCH)\$(ProjectName).sys</NMakeOutput>
+    <NMakeCleanCommandLine>RMDIR /S /Q "$(OutDir)"</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_DDK_;_NDEBUG;DBG=0;_AMD64_;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(WDKPATH)\inc\ddk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt;$(WDKPATH)\inc\wdf\kmdf\1.9;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeBuildCommandLine>CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -bewMgZ</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>RMDIR /S /Q "$(OutDir)"
+CALL $(WDKPATH)\bin\setenv.bat $(WDKPATH) $(DDKBUILDENV) $(DDKBUILDTYPE) $(DDKTARGETOS)
+CD /D "$(ProjectDir)"
+SET BROWSER_INFO=1
+BUILD -cbewMgZ</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
